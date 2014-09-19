@@ -12,10 +12,10 @@ Abstract Class to manage RDBMS (MySQL, MSSQLServer, ODBC, PostgreSQL) connection
 * [MyLogPHP 1.2.1](https://code.google.com/p/mylogphp/)
 
 ## Developer Documentation ##
-In the Code.
+In the Code (phpDoc).
 
 ## Installation ##
-Copy directory or clone repository.
+Clone repository.
 
 ## Basic Example ##
 See the examples.php
@@ -26,7 +26,9 @@ Sorry, my english is bad :(.
 
 ## References ##
 http://es.wikipedia.org/wiki/Patr%C3%B3n_de_dise%C3%B1o
+
 http://es.wikipedia.org/wiki/Singleton
+
 http://es.wikipedia.org/wiki/Abstract_Factory
 
 
