@@ -24,6 +24,8 @@ See the examples.php
 The SQL Server connection only works in MS Windows.
 Sorry, my english is bad :(.
 
+desde CODE
+
 ## References ##
 http://es.wikipedia.org/wiki/Patr%C3%B3n_de_dise%C3%B1o
 
