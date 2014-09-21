@@ -243,7 +243,7 @@ class MyDb
 		trigger_error('Clone is not permitted.', E_USER_ERROR);
 	}
 
-    /**
+	/**
 	* Return error when try deserialize object
 	*
 	* @return error
