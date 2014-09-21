@@ -418,10 +418,10 @@ class SQLServerDb extends DriverDb
 	public function escape($var)
 	{
 		if(get_magic_quotes_gpc()){
-        	$var = stripslashes($var);
-    	}	
+			$var = stripslashes($var);
+		}
 
-    	return str_replace("'", "''", $var);
+		return str_replace("'", "''", $var);
 	}
 
 	/**
@@ -565,10 +565,9 @@ class ODBCDb extends DriverDb
 	public function escape($var)
 	{
 		if(get_magic_quotes_gpc()){
-        	$var = stripslashes($var);
-    	}	
-
-    	return str_replace("'", "''", $var);
+			$var = stripslashes($var);
+		}
+		return str_replace("'", "''", $var);
 	}
 }
 
@@ -692,7 +691,7 @@ class PostgreSQLDb extends DriverDb
 	*/
 	public function escape($var)
 	{
-    	return pg_escape_string($var);
+		return pg_escape_string($var);
 	}
 }
 

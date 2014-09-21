@@ -25,11 +25,9 @@ The SQL Server connection only works in MS Windows.
 Sorry, my english is bad :(.
 
 ## References ##
-http://es.wikipedia.org/wiki/Patr%C3%B3n_de_dise%C3%B1o
-
-http://es.wikipedia.org/wiki/Singleton
-
-http://es.wikipedia.org/wiki/Abstract_Factory
+(http://es.wikipedia.org/wiki/Patr%C3%B3n_de_dise%C3%B1o)
+(http://es.wikipedia.org/wiki/Singleton)
+(http://es.wikipedia.org/wiki/Abstract_Factory)
 
 
 

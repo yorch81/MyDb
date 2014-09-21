@@ -233,7 +233,6 @@ class MyDb
 		return $this->_providerName;
 	}
 
-
 	/**
 	* Return error when try clone object
 	*
@@ -241,18 +240,17 @@ class MyDb
 	*/
 	public function __clone()
 	{
-        trigger_error('Clone is not permitted.', E_USER_ERROR);
-    }
+		trigger_error('Clone is not permitted.', E_USER_ERROR);
+	}
 
     /**
 	* Return error when try deserialize object
 	*
 	* @return error
 	*/
-    public function __wakeup()
-    {
-	  trigger_error("Could not deserialize ". get_class($this) ." class.", E_USER_ERROR);
+	public function __wakeup()
+	{
+		trigger_error("Could not deserialize ". get_class($this) ." class.", E_USER_ERROR);
 	}
 }
-
 ?>
