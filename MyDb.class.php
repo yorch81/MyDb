@@ -30,6 +30,7 @@ require_once('MyLogPHP-1.2.1.class.php');
  */
 class MyDb
 {
+
 	/**
      * Instance Handler to Singleton Pattern
      *
@@ -63,7 +64,7 @@ class MyDb
      * @access private
      */
 	private $_log = null;
-	
+
 	/**
      * Provider Name
      * @var string $_providerName
@@ -73,15 +74,15 @@ class MyDb
 	private $_providerName;
 
 	/**
-	* Constructor of class is private for implements Singleton Pattern
-	*
-	* @param string $provider A valid provider if Abstract Class
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	* @return resource | null
-	*/
+	 * Constructor of class is private for implements Singleton Pattern
+	 *
+	 * @param string $provider A valid provider if Abstract Class
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @return resource | null
+	 */
 	private function __construct($provider, $hostname, $username, $password, $dbname)
 	{
 		$this->_log = new MyLogPHP('mydb_log-' . date("Y-m-d") . '.log');
@@ -102,15 +103,15 @@ class MyDb
 	}
 
 	/**
-	* Implements Singleton Pattern
-	*
-	* @param string $provider A valid provider if Abstract Class
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name (DSN))
-	* @return resource | null
-	*/
+	 * Implements Singleton Pattern
+	 *
+	 * @param string $provider A valid provider if Abstract Class
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name (DSN))
+	 * @return resource | null
+	 */
 	public static function getConnection($provider, $hostname, $username, $password, $dbname)
 	{
 		// If exists Instance return same Instance
@@ -125,15 +126,15 @@ class MyDb
 	}
 
 	/**
-	* Implements Factory Pattern
-	*
-	* @param string $provider A valid provider if Abstract Class
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name (DSN))
-	* @return resource | null
-	*/
+	 * Implements Factory Pattern
+	 *
+	 * @param string $provider A valid provider if Abstract Class
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name (DSN))
+	 * @return resource | null
+	 */
 	public static function getInstance($provider, $hostname, $username, $password, $dbname)
 	{
 		// If exists Instance return null
@@ -148,10 +149,10 @@ class MyDb
 	}
 
 	/**
-	* Return escaped string
-	*
-	* @return string
-	*/
+	 * Return escaped string
+	 *
+	 * @return string
+	 */
 	public function escape ($var)
 	{
 		if (!is_null($this->_provider)){
@@ -161,13 +162,13 @@ class MyDb
 	}
 
 	/**
-	* Execute Command in RDBMS
-	*
-	* @param string $query A valid commando to execute in RDBMS
-	* @param array  $params Array with parameters to execute in RDBMS
-	* @param int    $resultType Type of Result default ASSOC
-	* @return array | false
-	*/
+	 * Execute Command in RDBMS
+	 *
+	 * @param string $query A valid commando to execute in RDBMS
+	 * @param array  $params Array with parameters to execute in RDBMS
+	 * @param int    $resultType Type of Result default ASSOC
+	 * @return array | false
+	 */
 	public function executeCommand($query, $params = null, $resultType = self::ASSOC)
 	{
 		if (!is_null($this->_provider)){
@@ -214,40 +215,40 @@ class MyDb
 	}
 
 	/**
-	* Return if exists connection
-	*
-	* @return true | false 
-	*/
+	 * Return if exists connection
+	 *
+	 * @return true | false
+	 */
 	public function isConnected()
 	{
 		return !is_null($this->_provider);
 	}
 
 	/**
-	* Return Provider
-	*
-	* @return string
-	*/
+	 * Return Provider
+	 *
+	 * @return string
+	 */
 	public function getProvider()
 	{
 		return $this->_providerName;
 	}
 
 	/**
-	* Return error when try clone object
-	*
-	* @return error
-	*/
+	 * Return error when try clone object
+	 *
+	 * @return error
+	 */
 	public function __clone()
 	{
 		trigger_error('Clone is not permitted.', E_USER_ERROR);
 	}
-
+	
 	/**
-	* Return error when try deserialize object
-	*
-	* @return error
-	*/
+	 * Return error when try deserialize object
+	 *
+	 * @return error
+	 */
 	public function __wakeup()
 	{
 		trigger_error("Could not deserialize ". get_class($this) ." class.", E_USER_ERROR);

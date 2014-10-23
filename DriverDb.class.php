@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DriverDb Abstract Class to manage connection
  *
@@ -28,86 +29,86 @@ abstract class DriverDb
 	protected $_errorCode = null;
 
 	/**
-	* Connect to RDBMS
-	*
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name (DSN))
-	* @return resource | null
-	*/
+	 * Connect to RDBMS
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name (DSN))
+	 * @return resource | null
+	 */
 	public abstract function connect($hostname, $username, $password, $dbname);
 
 	/**
-	* Execute a query command in RDBMS
-	*
-	* @param string $query Query command to execute
-	* @param array $params Array of parameters in query (default = null)
-	* @return object | false
-	*/
+	 * Execute a query command in RDBMS
+	 *
+	 * @param string $query Query command to execute
+	 * @param array $params Array of parameters in query (default = null)
+	 * @return object | false
+	 */
 	public abstract function query($query, $params=null);
 
 	/**
-	* Fetch a row as an array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (enum)
-	*/
+	 * Fetch a row as an array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (enum)
+	 */
 	public abstract function fetchArrayEnum($resultSet);
 
 	/**
-	* Fetch a row as an associative array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (assoc)
-	*/
+	 * Fetch a row as an associative array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (assoc)
+	 */
 	public abstract function fetchArrayAssoc($resultSet);
 
 	/**
-	* Return escaped string
-	*
-	* @param string $var string to be escaped
-	* @return string
-	*/
+	 * Return escaped string
+	 *
+	 * @param string $var string to be escaped
+	 * @return string
+	 */
 	public abstract function escape($var);
 
 	/**
-	* Return if exists connection
-	*
-	* @return true | false 
-	*/
+	 * Return if exists connection
+	 *
+	 * @return true | false 
+	 */
 	public function isConnected()
 	{
 		return !is_null($this->_connection);
 	}
 
 	/**
-	* Return true if error exists
-	*
-	* @return true | false
-	*/
+	 * Return true if error exists
+	 *
+	 * @return true | false
+	 */
 	public function hasError()
 	{
 		return !is_null($this->_errorCode);
 	}
 
 	/**
-	* Return last error message
-	*
-	* @return string
-	*/
+	 * Return last error message
+	 *
+	 * @return string
+	 */
 	public function getErrorCode()
 	{
 		return $this->_errorCode;
 	}
 
 	/**
-	* Check if PHP Extension is loaded
-	* you can check extensions with php -m
-	*
-	* @param string $phpExtension PHP Extension
-	* @return true | false com_dotnet
-	*/
+	 * Check if PHP Extension is loaded
+	 * you can check extensions with php -m
+	 *
+	 * @param string $phpExtension PHP Extension
+	 * @return true | false com_dotnet
+	 */
 	public function checkExtension($phpExtension)
 	{
 		$this->_errorCode = null;
@@ -138,15 +139,16 @@ abstract class DriverDb
  */
 class MySQLDb extends DriverDb
 {
+
 	/**
-	* Constructor of the class
-	*
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	* @return instance
-	*/
+	 * Constructor of the class
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @return instance
+	 */
 	public function __construct($hostname, $username, $password, $dbname)
 	{
 		if ($this->checkExtension('mysqli')){
@@ -155,14 +157,14 @@ class MySQLDb extends DriverDb
 	}
 
 	/**
-	* Connect to Mysql or MariaDb
-	*
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	* @return resource | null
-	*/
+	 * Connect to Mysql or MariaDb
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @return resource | null
+	 */
 	public function connect($hostname, $username, $password, $dbname)
 	{
 		$this->_connection = @mysqli_connect($hostname, $username, $password, $dbname);
@@ -178,12 +180,12 @@ class MySQLDb extends DriverDb
 	}
 
 	/**
-	* Execute a query command in RDBMS
-	*
-	* @param string $query Query command to execute
-	* @param array $params Array of parameters in query (default = null)
-	* @return object | false
-	*/
+	 * Execute a query command in RDBMS
+	 *
+	 * @param string $query Query command to execute
+	 * @param array $params Array of parameters in query (default = null)
+	 * @return object | false
+	 */
 	public function query($query, $params=null)
 	{
 		$resultSet = null;
@@ -233,43 +235,43 @@ class MySQLDb extends DriverDb
 	}
 	
 	/**
-	* Fetch a row as an array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (enum)
-	*/
+	 * Fetch a row as an array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (enum)
+	 */
 	public function fetchArrayEnum($resultSet)
 	{
 		return mysqli_fetch_array($resultSet, MYSQLI_NUM);
 	}
-	
+
 	/**
-	* Fetch a row as an associative array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (assoc)
-	*/
+	 * Fetch a row as an associative array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (assoc)
+	 */
 	public function fetchArrayAssoc($resultSet)
 	{
 		return mysqli_fetch_array($resultSet, MYSQLI_ASSOC);
 	}
-	
+
 	/**
-	* Return escaped string
-	*
-	* @param string $var string to be escaped
-	* @return string
-	*/
+	 * Return escaped string
+	 *
+	 * @param string $var string to be escaped
+	 * @return string
+	 */
 	public function escape($var)
 	{
 		return mysqli_real_escape_string($this->_connection, $var);
 	}
 
 	/**
-	* Get Next Resultset
-	* resolves the bug: "Commands out of sync; you can't run this command now"
-	* @return void
-	*/
+	 * Get Next Resultset
+	 * resolves the bug: "Commands out of sync; you can't run this command now"
+	 * @return void
+	 */
 	public function next_result()
 	{
 		@mysqli_next_result($this->_connection);
@@ -277,12 +279,12 @@ class MySQLDb extends DriverDb
 	}
 
 	/**
-	* Return a string with type parameters to execute prepared statement
-	*
-	* @param array $arrayParams Query command to execute
-	* @return string
-	* @access private
-	*/
+	 * Return a string with type parameters to execute prepared statement
+	 *
+	 * @param array $arrayParams Query command to execute
+	 * @return string
+	 * @access private
+	 */
 	private function arrayMySQLType($arrayParams)
 	{
 		$arrayTypes = '';
@@ -319,15 +321,16 @@ class MySQLDb extends DriverDb
  */
 class SQLServerDb extends DriverDb
 {
+
 	/**
-	* Constructor of the class
-	*
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	* @return instance
-	*/
+	 * Constructor of the class
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @return instance
+	 */
 	public function __construct($hostname, $username, $password, $dbname)
 	{
 		if ($this->checkExtension('sqlsrv')){
@@ -336,14 +339,14 @@ class SQLServerDb extends DriverDb
 	}
 
 	/**
-	* Connect to SQL Server 2x using Microsoft PHP Official Driver
-	*
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	* @return resource | null
-	*/
+	 * Connect to SQL Server 2x using Microsoft PHP Official Driver
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @return resource | null
+	 */
 	public function connect($hostname, $username, $password, $dbname)
 	{
 		$connectionInfo = array("Database"=>$dbname, "UID"=>$username, "PWD"=>$password, "CharacterSet" => "UTF-8", "MultipleActiveResultSets" => false);
@@ -357,12 +360,12 @@ class SQLServerDb extends DriverDb
 	}
 
 	/**
-	* Execute a query command in RDBMS
-	*
-	* @param string $query Query command to execute
-	* @param array $params Array of parameters in query (default = null)
-	* @return object | false
-	*/
+	 * Execute a query command in RDBMS
+	 *
+	 * @param string $query Query command to execute
+	 * @param array $params Array of parameters in query (default = null)
+	 * @return object | false
+	 */
 	public function query($query, $params=null)
 	{
 		$resultSet = null;
@@ -387,34 +390,36 @@ class SQLServerDb extends DriverDb
 		}
 	}
 	
+
 	/**
-	* Fetch a row as an array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (enum)
-	*/
+	 * Fetch a row as an array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (enum)
+	 */
 	public function fetchArrayEnum($resultSet)
 	{
 		return sqlsrv_fetch_array($resultSet, SQLSRV_FETCH_NUMERIC);
 	}
 	
 	/**
-	* Fetch a row as an associative array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (assoc)
-	*/
+	 * Fetch a row as an associative array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (assoc)
+	 */
 	public function fetchArrayAssoc($resultSet)
 	{
 		return sqlsrv_fetch_array($resultSet, SQLSRV_FETCH_ASSOC);
 	}
 	
+
 	/**
-	* Return escaped string
-	*
-	* @param string $var string to be escaped
-	* @return string
-	*/
+	 * Return escaped string
+	 *
+	 * @param string $var string to be escaped
+	 * @return string
+	 */
 	public function escape($var)
 	{
 		if(get_magic_quotes_gpc()){
@@ -425,11 +430,11 @@ class SQLServerDb extends DriverDb
 	}
 
 	/**
-	* Load Error Code
-	*
-	* @return void
-	* @access private
-	*/
+	 * Load Error Code
+	 *
+	 * @return void
+	 * @access private
+	 */
 	private function loadError()
 	{
 		if( ($errors = sqlsrv_errors() ) != null) {
@@ -452,15 +457,16 @@ class SQLServerDb extends DriverDb
  */
 class ODBCDb extends DriverDb
 {
+
 	/**
-	* Constructor of the class
-	*
-	* @param string $hostname A valid hostname default 'localhost'
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	* @return instance
-	*/
+	 * Constructor of the class
+	 *
+	 * @param string $hostname A valid hostname default 'localhost'
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @return instance
+	 */
 	public function __construct($hostname = 'localhost', $username, $password, $dbname)
 	{
 		if ($this->checkExtension('odbc')){
@@ -469,14 +475,14 @@ class ODBCDb extends DriverDb
 	}
 
 	/**
-	* Connect to ODBC DSN using Microsoft PHP Official Driver
-	*
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	* @return resource | null
-	*/
+	 * Connect to ODBC DSN using Microsoft PHP Official Driver
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @return resource | null
+	 */
 	public function connect($hostname, $username, $password, $dbname)
 	{
 		$this->_connection = @odbc_connect($dbname, $username, $password);
@@ -488,12 +494,12 @@ class ODBCDb extends DriverDb
 	}
 
 	/**
-	* Execute a query command in RDBMS
-	*
-	* @param string $query Query command to execute
-	* @param array $params Array of parameters in query (default = null)
-	* @return object | false
-	*/
+	 * Execute a query command in RDBMS
+	 *
+	 * @param string $query Query command to execute
+	 * @param array $params Array of parameters in query (default = null)
+	 * @return object | false
+	 */
 	public function query($query, $params=null)
 	{
 		$resultSet = null;
@@ -527,11 +533,11 @@ class ODBCDb extends DriverDb
 	}
 
 	/**
-	* Fetch a row as an array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (enum)
-	*/
+	 * Fetch a row as an array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (enum)
+	 */
 	public function fetchArrayEnum($resultSet)
 	{
 		if (gettype($resultSet) == 'resource'){
@@ -541,14 +547,14 @@ class ODBCDb extends DriverDb
 
 			return $enumArray;
 		}
-	}		
-	
+	}
+
 	/**
-	* Fetch a row as an associative array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (assoc)
-	*/
+	 * Fetch a row as an associative array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (assoc)
+	 */
 	public function fetchArrayAssoc($resultSet)
 	{
 		if (gettype($resultSet) == 'resource'){
@@ -557,11 +563,11 @@ class ODBCDb extends DriverDb
 	}
 	
 	/**
-	* Return escaped string
-	*
-	* @param string $var string to be escaped
-	* @return string
-	*/
+	 * Return escaped string
+	 *
+	 * @param string $var string to be escaped
+	 * @return string
+	 */
 	public function escape($var)
 	{
 		if(get_magic_quotes_gpc()){
@@ -584,14 +590,14 @@ class ODBCDb extends DriverDb
 class PostgreSQLDb extends DriverDb
 {
 	/**
-	* Constructor of the class
-	*
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	* @return instance
-	*/
+	 * Constructor of the class
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @return instance
+	 */
 	public function __construct($hostname, $username, $password, $dbname)
 	{
 		if ($this->checkExtension('pgsql')){
@@ -600,14 +606,14 @@ class PostgreSQLDb extends DriverDb
 	}
 
 	/**
-	* Connect to PostgreSQL
-	*
-	* @param string $hostname A valid hostname
-	* @param string $username A valid user in RDBMS
-	* @param string $password A valid password in RDBMS
-	* @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	* @return resource | null
-	*/
+	 * Connect to PostgreSQL
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @return resource | null
+	 */
 	public function connect($hostname, $username, $password, $dbname)
 	{
 		$connString = "host=$hostname port=5432 dbname=$dbname user=$username password=$password";
@@ -630,13 +636,13 @@ class PostgreSQLDb extends DriverDb
 	}
 
 	/**
-	* Execute a query command in RDBMS
-	* NOTE: The parameters in SQL Query must be $#, example: 'SELECT * FROM MYTABLE WHERE ID = $1 AND DESCRIPTION = $2'
-	*
-	* @param string $query Query command to execute
-	* @param array $params Array of parameters in query (default = null)
-	* @return object | false
-	*/
+	 * Execute a query command in RDBMS
+	 * NOTE: The parameters in SQL Query must be $#, example: 'SELECT * FROM MYTABLE WHERE ID = $1 AND DESCRIPTION = $2'
+	 *
+	 * @param string $query Query command to execute
+	 * @param array $params Array of parameters in query (default = null)
+	 * @return object | false
+	 */
 	public function query($query, $params=null)
 	{
 		$resultSet = null;
@@ -660,35 +666,35 @@ class PostgreSQLDb extends DriverDb
 			}
 		}
 	}
-	
+
 	/**
-	* Fetch a row as an array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (enum)
-	*/
+	 * Fetch a row as an array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (enum)
+	 */
 	public function fetchArrayEnum($resultSet)
 	{
 		return pg_fetch_array($resultSet, NULL, PGSQL_NUM);
 	}
-	
+
 	/**
-	* Fetch a row as an associative array
-	*
-	* @param object $resultSet Resultset of execute query
-	* @return array (assoc)
-	*/
+	 * Fetch a row as an associative array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (assoc)
+	 */
 	public function fetchArrayAssoc($resultSet)
 	{
 		return pg_fetch_array($resultSet, NULL, PGSQL_ASSOC);
 	}
-	
+
 	/**
-	* Return escaped string
-	*
-	* @param string $var string to be escaped
-	* @return string
-	*/
+	 * Return escaped string
+	 *
+	 * @param string $var string to be escaped
+	 * @return string
+	 */
 	public function escape($var)
 	{
 		return pg_escape_string($var);
