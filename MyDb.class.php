@@ -30,7 +30,6 @@ require_once('MyLogPHP-1.2.1.class.php');
  */
 class MyDb
 {
-
 	/**
      * Instance Handler to Singleton Pattern
      *

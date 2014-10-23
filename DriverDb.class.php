@@ -19,7 +19,7 @@ abstract class DriverDb
      * @access private
      */
 	protected $_connection = null;
-	
+
 	/**
      * Error Code
      *
