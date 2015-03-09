@@ -190,7 +190,7 @@ class MySQLDb extends DriverDb
 			$this->_connection = null;
 			$this->_errorCode = (string)mysqli_connect_errno() . '-' . mysqli_connect_error();
 		}
-		else{;
+		else{
 			mysqli_set_charset($this->_connection, "utf8");
 			//mysqli_query($this->_connection, "SET NAMES 'utf8' COLLATE 'utf8_spanish_ci'");
 		}
