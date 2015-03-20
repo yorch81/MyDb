@@ -150,6 +150,7 @@ class MyDb
 	/**
 	 * Return escaped string
 	 *
+	 * @param string $var string to be escaped
 	 * @return string
 	 */
 	public function escape ($var)
