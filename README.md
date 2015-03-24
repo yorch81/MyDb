@@ -5,10 +5,10 @@ Abstract Class to manage RDBMS (MySQL, MSSQLServer, ODBC, PostgreSQL) connection
 
 ## Requirements ##
 * [PHP 5.4.1 or higher](http://www.php.net/)
-* [mysqli extension](http://www.php.net/)
+* [mysqli extension](http://php.net/manual/en/class.mysqli.php)
 * [sqlsrv extension](http://msdn.microsoft.com/en-us/sqlserver/ff657782.aspx/)
-* [odbc extension](http://www.php.net/)
-* [pgsql extension](http://www.php.net/)
+* [odbc extension](http://php.net/manual/en/ref.uodbc.php)
+* [pgsql extension](http://php.net/manual/en/ref.pgsql.php)
 * [MyLogPHP 1.2.1](https://code.google.com/p/mylogphp/)
 
 ## Developer Documentation ##
@@ -30,6 +30,8 @@ http://es.wikipedia.org/wiki/Patr%C3%B3n_de_dise%C3%B1o
 http://es.wikipedia.org/wiki/Singleton
 
 http://es.wikipedia.org/wiki/Abstract_Factory
+
+P.D. Let's go play !!!
 
 
 
