@@ -9,13 +9,14 @@ Abstract Class to manage RDBMS (MySQL, MSSQLServer, ODBC, PostgreSQL) connection
 * [sqlsrv extension](http://msdn.microsoft.com/en-us/sqlserver/ff657782.aspx/)
 * [odbc extension](http://php.net/manual/en/ref.uodbc.php)
 * [pgsql extension](http://php.net/manual/en/ref.pgsql.php)
-* [MyLogPHP 1.2.1](https://code.google.com/p/mylogphp/)
+* [monolog](https://github.com/Seldaek/monolog)
 
 ## Developer Documentation ##
 In the Code (phpDoc).
 
 ## Installation ##
 Clone repository.
+Execute php composer.phar install
 
 ## Basic Example ##
 See the examples.php
