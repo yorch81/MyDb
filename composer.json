@@ -1,5 +1,5 @@
 {
-    "name": "yorch/MyDb",
+    "name": "yorch/mydb",
     "description": "Abstract Class to manage RDBMS (MySQL, MSSQLServer, ODBC, PostgreSQL) connections",
     "homepage": "https://github.com/yorch81/MyDb",
     "type": "library",
