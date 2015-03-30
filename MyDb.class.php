@@ -1,6 +1,9 @@
 <?php
 require_once('DriverDb.class.php');
-require_once('MyLogPHP-1.2.1.class.php');
+require 'vendor/autoload.php';
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 /**
  * MyDb 
@@ -84,20 +87,24 @@ class MyDb
 	 */
 	private function __construct($provider, $hostname, $username, $password, $dbname)
 	{
-		$this->_log = new MyLogPHP('mydb_log-' . date("Y-m-d") . '.log');
+		$logName = 'mydb_log-' . date("Y-m-d") . '.log';
+
+		$this->_log = new Logger('MyDb');
+		$this->_log->pushHandler(new StreamHandler($logName, Logger::ERROR));
+
 		$this->_providerName = $provider;
 
 		if(class_exists($provider)){
 			$this->_provider = new $provider($hostname, $username, $password, $dbname);
 
 			if(!$this->_provider->isConnected()){
-				$this->_log->error($this->_provider->getErrorCode(),'');
+				$this->_log->addError($this->_provider->getErrorCode());
 				$this->_provider = null;
 			}
 		}
 		else{
 			$this->_provider = null;
-			$this->_log->error('Provider ' . $provider . ' Not Implented.','');
+			$this->_log->addError('Provider ' . $provider . ' Not Implented.');
 		}
 	}
 
@@ -175,7 +182,7 @@ class MyDb
 			$result = $this->_provider->query($query, $params);
 
 			if($result === false) {
-				$this->_log->error($this->_provider->getErrorCode(),$query);
+				$this->_log->addError($this->_provider->getErrorCode() . '(' . $query . ')');
 			}
 			else{
 				$retArray = array();
