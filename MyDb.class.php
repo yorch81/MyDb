@@ -1,4 +1,6 @@
 <?php
+namespace Net\Yorch;
+
 require_once('DriverDb.class.php');
 require 'vendor/autoload.php';
 
@@ -104,7 +106,7 @@ class MyDb
 		}
 		else{
 			$this->_provider = null;
-			$this->_log->addError('Provider ' . $provider . ' Not Implented.');
+			$this->_log->addError('Provider ' . $provider . ' Not Implemented.');
 		}
 	}
 
@@ -126,7 +128,7 @@ class MyDb
 		}
 		else{
 			$class = __CLASS__;
-			self::$_instance = new $class($provider, $hostname, $username, $password, $dbname);
+			self::$_instance = new $class("\\Net\\Yorch\\" . $provider, $hostname, $username, $password, $dbname);
 			return self::$_instance;
 		}
 	}
@@ -150,7 +152,7 @@ class MyDb
 		}
 		else{
 			$class = __CLASS__;
-			return new $class($provider, $hostname, $username, $password, $dbname);
+			return new $class("\\Net\\Yorch\\" . $provider, $hostname, $username, $password, $dbname);
 		}
 	}
 
