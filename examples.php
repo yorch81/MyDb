@@ -1,4 +1,6 @@
 <?php
+require 'vendor/autoload.php';
+
 require_once('MyDb.class.php');
 
 // Mysql Example

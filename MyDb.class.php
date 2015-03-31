@@ -1,6 +1,5 @@
 <?php
 require_once('DriverDb.class.php');
-require 'vendor/autoload.php';
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
@@ -104,7 +103,7 @@ class MyDb
 		}
 		else{
 			$this->_provider = null;
-			$this->_log->addError('Provider ' . $provider . ' Not Implented.');
+			$this->_log->addError('Provider ' . $provider . ' Not Implemented.');
 		}
 	}
 
