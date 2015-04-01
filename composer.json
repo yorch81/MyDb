@@ -1,7 +1,7 @@
 {
     "name": "yorch/mydb",
     "description": "Abstract Class to manage RDBMS (MySQL, MSSQLServer, ODBC, PostgreSQL) connections",
-    "keywords": ["database","abstract layer"],
+    "keywords": ["abstract layer","mysql","sql server","postgresql","odbc"],
     "homepage": "https://github.com/yorch81/MyDb",
     "type": "library",
     "license": "Apache-2.0",

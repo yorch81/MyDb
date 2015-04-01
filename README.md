@@ -1,4 +1,4 @@
-# MyDb Abstract Class to manage RDBMS connections #
+# MyDb #
 
 ## Description ##
 Abstract Class to manage RDBMS (MySQL, MSSQLServer, ODBC, PostgreSQL) connections
@@ -15,14 +15,25 @@ Abstract Class to manage RDBMS (MySQL, MSSQLServer, ODBC, PostgreSQL) connection
 In the Code (phpDoc).
 
 ## Installation ##
-Clone repository.
-Execute php composer.phar install
+Create file composer.json
+
+{
+    "require": {
+        "yorch/mydb": "dev-master"
+    }
+}
+
+Execute composer.phar install
 
 ## Basic Example ##
 See the examples.php
 
 ## Notes ##
 The SQL Server connection only works in MS Windows.
+
+For PostgreSQL the parameters in SQL Query must be $#.
+example: 'SELECT * FROM MYTABLE WHERE ID = $1 AND DESCRIPTION = $2'
+
 Sorry, my english is bad :(.
 
 ## References ##
