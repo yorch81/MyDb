@@ -34,6 +34,9 @@ The SQL Server connection only works in MS Windows.
 For PostgreSQL the parameters in SQL Query must be $#.
 example: 'SELECT * FROM MYTABLE WHERE ID = $1 AND DESCRIPTION = $2'
 
+For ODBC connection, if the query insert uses ? parameters throw this error
+(COUNT field incorrect or syntax error).
+
 Sorry, my english is bad :(.
 
 ## References ##
