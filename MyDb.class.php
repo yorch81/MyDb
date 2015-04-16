@@ -82,7 +82,6 @@ class MyDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	 * @return resource | null
 	 */
 	private function __construct($provider, $hostname, $username, $password, $dbname)
 	{
@@ -223,7 +222,7 @@ class MyDb
 	/**
 	 * Return if exists connection
 	 *
-	 * @return true | false
+	 * @return boolean
 	 */
 	public function isConnected()
 	{
@@ -243,7 +242,6 @@ class MyDb
 	/**
 	 * Return error when try clone object
 	 *
-	 * @return error
 	 */
 	public function __clone()
 	{
@@ -253,7 +251,6 @@ class MyDb
 	/**
 	 * Return error when try deserialize object
 	 *
-	 * @return error
 	 */
 	public function __wakeup()
 	{

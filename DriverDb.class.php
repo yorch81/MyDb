@@ -92,7 +92,7 @@ abstract class DriverDb
 	/**
 	 * Return if exists connection
 	 *
-	 * @return true | false 
+	 * @return boolean
 	 */
 	public function isConnected()
 	{
@@ -102,7 +102,7 @@ abstract class DriverDb
 	/**
 	 * Return true if error exists
 	 *
-	 * @return true | false
+	 * @return boolean
 	 */
 	public function hasError()
 	{
@@ -124,7 +124,7 @@ abstract class DriverDb
 	 * you can check extensions with php -m
 	 *
 	 * @param string $phpExtension PHP Extension
-	 * @return true | false com_dotnet
+	 * @return boolean
 	 */
 	public function checkExtension($phpExtension)
 	{
@@ -164,7 +164,6 @@ class MySQLDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	 * @return instance
 	 */
 	public function __construct($hostname, $username, $password, $dbname)
 	{
@@ -287,7 +286,6 @@ class MySQLDb extends DriverDb
 	/**
 	 * Get Next Resultset
 	 * resolves the bug: "Commands out of sync; you can't run this command now"
-	 * @return void
 	 */
 	public function next_result()
 	{
@@ -346,7 +344,6 @@ class SQLServerDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	 * @return instance
 	 */
 	public function __construct($hostname, $username, $password, $dbname)
 	{
@@ -449,7 +446,6 @@ class SQLServerDb extends DriverDb
 	/**
 	 * Load Error Code
 	 *
-	 * @return void
 	 * @access private
 	 */
 	private function loadError()
@@ -482,7 +478,6 @@ class ODBCDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	 * @return instance
 	 */
 	public function __construct($hostname = 'localhost', $username, $password, $dbname)
 	{
@@ -613,7 +608,6 @@ class PostgreSQLDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
-	 * @return instance
 	 */
 	public function __construct($hostname, $username, $password, $dbname)
 	{

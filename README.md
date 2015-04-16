@@ -12,7 +12,7 @@ Abstract Class to manage RDBMS (MySQL, MSSQLServer, ODBC, PostgreSQL) connection
 * [monolog](https://github.com/Seldaek/monolog)
 
 ## Developer Documentation ##
-In the Code (phpDoc).
+Execute phpdoc -d MyDb/
 
 ## Installation ##
 Create file composer.json
