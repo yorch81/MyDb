@@ -25,8 +25,27 @@ Create file composer.json
 
 Execute composer.phar install
 
-## Basic Example ##
-See the examples.php
+## Example ##
+~~~
+// Mysql Example
+$provider = 'MySQLDb';
+$hostname = '';
+$username = '';
+$password = '';
+$dbname   = '';
+
+$dbMySQL = MyDb::getInstance($provider, $hostname, $username, $password, $dbname);  
+
+$query = sprintf("SELECT 1 AS %s", $dbMySQL->escape($provider));
+
+// Associate
+print_r($dbMySQL->executeCommand($query));  
+
+// Enumerate
+print_r($dbMySQL->executeCommand($query, null, MyDb::ENUM));  
+
+$dbMySQL = null;
+~~~
 
 ## Notes ##
 The SQL Server connection only works in MS Windows.
