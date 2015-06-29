@@ -87,11 +87,12 @@ class MyDbTest extends PHPUnit_Framework_TestCase
      * Test Method for executeCommand
      */
     public function testExecuteCommand() {
-    	$query = "SELECT 1 AS FIELD";
+    	$query = "SELECT ? AS FIELD";
+        $params = array(1);
 
         $expected =  array(array('FIELD' => 1));
 
-        $current = $this->db->executeCommand($query);
+        $current = $this->db->executeCommand($query, $params);
 
         $this->assertEquals($expected, $current);
     }

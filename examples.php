@@ -15,7 +15,7 @@ $dbMySQL = MyDb::getInstance($provider, $hostname, $username, $password, $dbname
 $query = sprintf("SELECT 1 AS %s", $dbMySQL->escape($provider));
 
 // Associate
-print_r($dbMySQL->executeCommand($query));  
+print_r($dbMySQL->executeCommand($query)); 
 
 // Enumerate
 print_r($dbMySQL->executeCommand($query, null, MyDb::ENUM));  
