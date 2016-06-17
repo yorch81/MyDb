@@ -34,7 +34,7 @@ $username = '';
 $password = '';
 $dbname   = '';
 
-$dbMySQL = MyDb::getInstance($provider, $hostname, $username, $password, $dbname);  
+$dbMySQL = MyDb::getInstance($provider, $hostname, $username, $password, $dbname, 3306);  
 
 $query = sprintf("SELECT 1 AS %s", $dbMySQL->escape($provider));
 

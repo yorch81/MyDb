@@ -10,7 +10,7 @@ $username = '';
 $password = '';
 $dbname   = '';
 
-$dbMySQL = MyDb::getInstance($provider, $hostname, $username, $password, $dbname);  
+$dbMySQL = MyDb::getInstance($provider, $hostname, $username, $password, $dbname, 3306);  
 
 $query = sprintf("SELECT 1 AS %s", $dbMySQL->escape($provider));
 
@@ -29,7 +29,7 @@ $username = '';
 $password = '';
 $dbname   = '';
 
-$dbSQLServer = MyDb::getInstance($provider, $hostname, $username, $password, $dbname);  
+$dbSQLServer = MyDb::getInstance($provider, $hostname, $username, $password, $dbname, 1433);  
 
 $query = sprintf("SELECT 1 AS %s", $dbSQLServer->escape($provider));
 
@@ -48,7 +48,7 @@ $username = '';
 $password = '';
 $dbname   = 'ODBCDSN'; // ODBC Data Source Name
 
-$dbODBC = MyDb::getInstance($provider, $hostname, $username, $password, $dbname);  
+$dbODBC = MyDb::getInstance($provider, $hostname, $username, $password, $dbname, 1);  
 
 $query = sprintf("SELECT 1 AS %s", $dbODBC->escape($provider));
 
@@ -67,7 +67,7 @@ $username = '';
 $password = '';
 $dbname   = '';
 
-$dbPgSQL = MyDb::getInstance($provider, $hostname, $username, $password, $dbname);  
+$dbPgSQL = MyDb::getInstance($provider, $hostname, $username, $password, $dbname, 5432);  
 
 $query = sprintf("SELECT 1 AS %s", $dbPgSQL->escape($provider));
 
@@ -86,7 +86,7 @@ $username = '';
 $password = '';
 $dbname   = '';
 
-$db = MyDb::getConnection($provider, $hostname, $username, $password, $dbname);  
+$db = MyDb::getConnection($provider, $hostname, $username, $password, $dbname, 3306);  
 
 $query = sprintf("SELECT 1 AS %s", $dbMySQL->escape($provider));
 

@@ -52,9 +52,10 @@ abstract class DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name (DSN))
+	 * @param int 	 $port   RDBMS Listen Port
 	 * @return resource | null
 	 */
-	public abstract function connect($hostname, $username, $password, $dbname);
+	public abstract function connect($hostname, $username, $password, $dbname, $port);
 
 	/**
 	 * Execute a query command in RDBMS
@@ -164,11 +165,12 @@ class MySQLDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
 	 */
-	public function __construct($hostname, $username, $password, $dbname)
+	public function __construct($hostname, $username, $password, $dbname, $port)
 	{
 		if ($this->checkExtension('mysqli')){
-			$this->connect($hostname, $username, $password, $dbname);
+			$this->connect($hostname, $username, $password, $dbname, $port);
 		}	
 	}
 
@@ -179,11 +181,12 @@ class MySQLDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
 	 * @return resource | null
 	 */
-	public function connect($hostname, $username, $password, $dbname)
+	public function connect($hostname, $username, $password, $dbname, $port)
 	{
-		$this->_connection = @mysqli_connect($hostname, $username, $password, $dbname);
+		$this->_connection = @mysqli_connect($hostname, $username, $password, $dbname, $port);
 
 		if (!$this->_connection) {
 			$this->_connection = null;
@@ -344,11 +347,12 @@ class SQLServerDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
 	 */
-	public function __construct($hostname, $username, $password, $dbname)
+	public function __construct($hostname, $username, $password, $dbname, $port)
 	{
 		if ($this->checkExtension('sqlsrv')){
-			$this->connect($hostname, $username, $password, $dbname);
+			$this->connect($hostname, $username, $password, $dbname, $port);
 		}	
 	}
 
@@ -359,11 +363,14 @@ class SQLServerDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
 	 * @return resource | null
 	 */
-	public function connect($hostname, $username, $password, $dbname)
+	public function connect($hostname, $username, $password, $dbname, $port)
 	{
 		$connectionInfo = array("Database"=>$dbname, "UID"=>$username, "PWD"=>$password, "CharacterSet" => "UTF-8", "MultipleActiveResultSets" => false);
+
+		$hostname = $hostname . ',' . $port;
 
 		$this->_connection = @sqlsrv_connect($hostname, $connectionInfo);
 
@@ -478,8 +485,9 @@ class ODBCDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
 	 */
-	public function __construct($hostname = 'localhost', $username, $password, $dbname)
+	public function __construct($hostname = 'localhost', $username, $password, $dbname, $port)
 	{
 		if ($this->checkExtension('odbc')){
 			$this->connect($hostname, $username, $password, $dbname);
@@ -493,9 +501,10 @@ class ODBCDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
 	 * @return resource | null
 	 */
-	public function connect($hostname, $username, $password, $dbname)
+	public function connect($hostname, $username, $password, $dbname, $port)
 	{
 		$this->_connection = @odbc_connect($dbname, $username, $password);
 
@@ -608,11 +617,12 @@ class PostgreSQLDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
 	 */
-	public function __construct($hostname, $username, $password, $dbname)
+	public function __construct($hostname, $username, $password, $dbname, $port)
 	{
 		if ($this->checkExtension('pgsql')){
-			$this->connect($hostname, $username, $password, $dbname);
+			$this->connect($hostname, $username, $password, $dbname, $port);
 		}	
 	}
 
@@ -623,11 +633,12 @@ class PostgreSQLDb extends DriverDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
 	 * @return resource | null
 	 */
-	public function connect($hostname, $username, $password, $dbname)
+	public function connect($hostname, $username, $password, $dbname, $port)
 	{
-		$connString = "host=$hostname port=5432 dbname=$dbname user=$username password=$password";
+		$connString = "host=$hostname port=" . $port . " dbname=$dbname user=$username password=$password";
 
 		$this->_connection = @pg_connect($connString);
 

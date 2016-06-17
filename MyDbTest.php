@@ -43,7 +43,7 @@ class MyDbTest extends PHPUnit_Framework_TestCase
     	$password = $GLOBALS["password"];
     	$dbname   = $GLOBALS["dbname"];
 
-        $this->db = MyDb::getInstance('MySQLDb', $hostname, $username, $password, $dbname);
+        $this->db = MyDb::getInstance('MySQLDb', $hostname, $username, $password, $dbname, 3306);
     }
 
     /**

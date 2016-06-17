@@ -82,8 +82,9 @@ class MyDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
 	 */
-	private function __construct($provider, $hostname, $username, $password, $dbname)
+	private function __construct($provider, $hostname, $username, $password, $dbname, $port)
 	{
 		$logName = 'mydb_log-' . date("Y-m-d") . '.log';
 
@@ -93,7 +94,7 @@ class MyDb
 		$this->_providerName = $provider;
 
 		if(class_exists($provider)){
-			$this->_provider = new $provider($hostname, $username, $password, $dbname);
+			$this->_provider = new $provider($hostname, $username, $password, $dbname, $port);
 
 			if(!$this->_provider->isConnected()){
 				$this->_log->addError($this->_provider->getErrorCode());
@@ -114,9 +115,10 @@ class MyDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name (DSN))
+	 * @param int 	 $port   RDBMS Listen Port
 	 * @return resource | null
 	 */
-	public static function getConnection($provider, $hostname, $username, $password, $dbname)
+	public static function getConnection($provider, $hostname, $username, $password, $dbname, $port)
 	{
 		// If exists Instance return same Instance
 		if(self::$_instance){
@@ -124,7 +126,7 @@ class MyDb
 		}
 		else{
 			$class = __CLASS__;
-			self::$_instance = new $class($provider, $hostname, $username, $password, $dbname);
+			self::$_instance = new $class($provider, $hostname, $username, $password, $dbname, $port);
 			return self::$_instance;
 		}
 	}
@@ -137,9 +139,10 @@ class MyDb
 	 * @param string $username A valid user in RDBMS
 	 * @param string $password A valid password in RDBMS
 	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name (DSN))
+	 * @param int 	 $port   RDBMS Listen Port
 	 * @return resource | null
 	 */
-	public static function getInstance($provider, $hostname, $username, $password, $dbname)
+	public static function getInstance($provider, $hostname, $username, $password, $dbname, $port)
 	{
 		// If exists Instance return null
 		if(self::$_instance){
@@ -148,7 +151,7 @@ class MyDb
 		}
 		else{
 			$class = __CLASS__;
-			return new $class($provider, $hostname, $username, $password, $dbname);
+			return new $class($provider, $hostname, $username, $password, $dbname, $port);
 		}
 	}
 
