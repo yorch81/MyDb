@@ -96,4 +96,6 @@ print_r($dbMySQL->executeCommand($query));
 // Clone in not permitted
 $dbclone = clone $db;
 
+
+
 ?>

@@ -490,7 +490,7 @@ class ODBCDb extends DriverDb
 	public function __construct($hostname = 'localhost', $username, $password, $dbname, $port)
 	{
 		if ($this->checkExtension('odbc')){
-			$this->connect($hostname, $username, $password, $dbname);
+			$this->connect($hostname, $username, $password, $dbname, $port);
 		}	
 	}
 
