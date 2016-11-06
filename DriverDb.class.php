@@ -219,6 +219,10 @@ class MySQLDb extends DriverDb
 			}
 		}
 		else{
+			// if is associative convert to enumerate
+			if ($this->is_associative_array($params))
+				$params = array_values($params);
+			
 			if ($prepared_stmt = mysqli_prepare($this->_connection, $query)){
 				$paramTypes = $this->arrayMySQLType($params);
 
@@ -324,6 +328,17 @@ class MySQLDb extends DriverDb
 		}
 
 		return $arrayTypes;
+	}
+
+	/**
+	 * Return true if the array is associative else return false
+	 * 
+	 * @param  array  $array Array Parameters
+	 * @return boolean
+	 */
+	private function is_associative_array($array)
+	{
+		return (is_array($array) && !is_numeric(implode("", array_keys($array))));
 	}
 }
 
