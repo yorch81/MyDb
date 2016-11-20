@@ -118,7 +118,7 @@ class MyDb
 	 * @param int 	 $port   RDBMS Listen Port
 	 * @return resource | null
 	 */
-	public static function getConnection($provider, $hostname, $username, $password, $dbname, $port)
+	public static function getConnection($provider='MySQLDb', $hostname='', $username='', $password='', $dbname='', $port=3306)
 	{
 		// If exists Instance return same Instance
 		if(self::$_instance){
@@ -142,7 +142,7 @@ class MyDb
 	 * @param int 	 $port   RDBMS Listen Port
 	 * @return resource | null
 	 */
-	public static function getInstance($provider, $hostname, $username, $password, $dbname, $port)
+	public static function getInstance($provider='MySQLDb', $hostname='', $username='', $password='', $dbname='', $port=3306)
 	{
 		// If exists Instance return null
 		if(self::$_instance){
