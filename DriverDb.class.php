@@ -738,4 +738,152 @@ class PostgreSQLDb extends DriverDb
 	}
 }
 
+/**
+ * MySQL PDO Class to manage connection to MySQL or MariaDb
+ *
+ * @category   MySQLPDO
+ * @package    DriverDb
+ * @copyright  Copyright 2017 Jorge Alberto Ponce Turrubiates
+ * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @version    1.0.0, 2017-10-11
+ * @author     Jorge Alberto Ponce Turrubiates (the.yorch@gmail.com)
+ */
+class MySQLPDO extends DriverDb
+{
+	/**
+	 * Prepared Query
+	 * 
+	 * @var null
+	 */
+	private $pQuery = null;
+
+	/**
+	 * Constructor of the class
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
+	 */
+	public function __construct($hostname, $username, $password, $dbname, $port)
+	{
+		if ($this->checkExtension('pdo_mysql')){
+			$this->connect($hostname, $username, $password, $dbname, $port);
+		}	
+	}
+
+	/**
+	 * Connect to Mysql or MariaDb
+	 *
+	 * @param string $hostname A valid hostname
+	 * @param string $username A valid user in RDBMS
+	 * @param string $password A valid password in RDBMS
+	 * @param string $dbname A valid database in RDBMS (For ODBC is a Data Source Name DSN)
+	 * @param int 	 $port   RDBMS Listen Port
+	 * @return resource | null
+	 */
+	public function connect($hostname, $username, $password, $dbname, $port)
+	{
+		$dsn = "mysql:host=" . $hostname .";port=" . $port . ";dbname=" . $dbname;
+
+		try{
+			$this->_connection = new PDO($dsn, $username, $password);
+			$this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		} 
+		catch(PDOException $e){
+			$this->_connection = null;
+			$this->_errorCode = '0 - Could not connect to Mysql';
+		}
+	}
+
+	/**
+	 * Execute a query command in RDBMS
+	 *
+	 * @param string $query Query command to execute
+	 * @param array $params Array of parameters in query (default = null)
+	 * @return object | false
+	 */
+	public function query($query, $params=null)
+	{
+		$resultSet = array('MSG' => 'OK');
+
+		if (is_null($params)){
+			try{
+				$this->pQuery = $this->_connection->prepare($query);
+				$this->pQuery->execute();
+
+				return $resultSet;
+			} 
+			catch(PDOException $e){
+				$this->_errorCode = $e->getMessage();
+				return false;
+			}
+		}
+		else{
+			try{
+				$this->pQuery = $this->_connection->prepare($query);
+				$this->pQuery->execute($params);
+
+				return $resultSet;
+			} 
+			catch(PDOException $e){
+				$this->_errorCode = $e->getMessage();
+				return false;
+			}
+		}
+	}
+	
+	/**
+	 * Fetch a row as an array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (enum)
+	 */
+	public function fetchArrayEnum($resultSet)
+	{
+		$result = null;
+
+		try{
+			$result = $this->pQuery->fetchAll(PDO::FETCH_NUM);
+		} 
+		catch(PDOException $e){
+			$result = null;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Fetch a row as an associative array
+	 *
+	 * @param object $resultSet Resultset of execute query
+	 * @return array (assoc)
+	 */
+	public function fetchArrayAssoc($resultSet)
+	{
+		$result = null;
+
+		try{
+			$result = $this->pQuery->fetchAll(PDO::FETCH_ASSOC);
+		} 
+		catch(PDOException $e){
+			$result = null;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Return escaped string
+	 *
+	 * @param string $var string to be escaped
+	 * @return string
+	 */
+	public function escape($var)
+	{
+		return $var;
+	}
+}
+
 ?>

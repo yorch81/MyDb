@@ -65,6 +65,9 @@ http://es.wikipedia.org/wiki/Singleton
 
 http://es.wikipedia.org/wiki/Abstract_Factory
 
+## Donate ##
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GXT4C7UZ3HFA8)
+
 P.D. Let's go play !!!
 
 

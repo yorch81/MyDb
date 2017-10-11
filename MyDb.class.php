@@ -188,29 +188,40 @@ class MyDb
 			else{
 				$retArray = array();
 
-				if (gettype($result) != 'boolean'){			
+				// If is MySQL PDO
+				if ($this->getProvider() == 'MySQLPDO'){
 					if ($resultType == self::ASSOC){
-						while($row = $this->_provider->fetchArrayAssoc($result)){
-							$retArray[] = $row;
-						}
+						$retArray = $this->_provider->fetchArrayAssoc($result);
 					}
 					else{
-						while($row = $this->_provider->fetchArrayEnum($result)){
-							$retArray[] = $row;
-						}
+						$retArray = $this->_provider->fetchArrayEnum($result);
 					}
+				}
+				else{
+					if (gettype($result) != 'boolean'){			
+						if ($resultType == self::ASSOC){
+							while($row = $this->_provider->fetchArrayAssoc($result)){
+								$retArray[] = $row;
+							}
+						}
+						else{
+							while($row = $this->_provider->fetchArrayEnum($result)){
+								$retArray[] = $row;
+							}
+						}
 
-					/********************************************************
-					If Mysql resolves the bug ("Commands out of sync; you can't run this command now") 
-					of call 2 stored procedures, example:
+						/********************************************************
+						If Mysql resolves the bug ("Commands out of sync; you can't run this command now") 
+						of call 2 stored procedures, example:
 
-					$conn->executeCommand('CALL sp1;');
-					$conn->executeCommand('CALL sp2;');
-					********************************************************/
-					if ($this->getProvider() == 'MySQLDb'){
-						//$result->close();
-						@mysqli_free_result($result);
-						$this->_provider->next_result();
+						$conn->executeCommand('CALL sp1;');
+						$conn->executeCommand('CALL sp2;');
+						********************************************************/
+						if ($this->getProvider() == 'MySQLDb'){
+							//$result->close();
+							@mysqli_free_result($result);
+							$this->_provider->next_result();
+						}
 					}
 				}
 
